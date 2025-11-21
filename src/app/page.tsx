@@ -26,7 +26,7 @@ export default function HomePage() {
           priority
         />
         <Link
-          href="mailto:contacto@aimm.com"
+          href="https://wa.me/56976204924"
           className="font-bold text-[#10456f] transition hover:underline text-xl"
         >
           Contacto

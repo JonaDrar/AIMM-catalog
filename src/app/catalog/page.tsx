@@ -22,7 +22,7 @@ export default async function CatalogPage() {
           className="h-12 w-auto object-contain"
           priority
         />
-       <h1 className="text-center text-3xl font-extrabold uppercase text-[--primary]">
+       <h1 className="text-center text-3xl font-extrabold uppercase text-[--primary] hidden md:block">
           Catálogo
         </h1>
         <Link
@@ -55,7 +55,7 @@ export default async function CatalogPage() {
       </div>
 
       <Link
-        href="https://wa.me/56900000000"
+        href="https://wa.me/56976204924"
         className="fixed bottom-5 right-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition hover:-translate-y-[2px] hover:shadow-xl"
         aria-label="WhatsApp"
       >
