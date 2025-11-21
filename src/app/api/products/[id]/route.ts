@@ -1,11 +1,8 @@
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
+import type { Session } from "next-auth";
+import { getProductById, removeProduct, updateProduct } from "@/lib/products";
 import { NextResponse, type NextRequest } from "next/server";
 import { authOptions } from "@/lib/auth";
-import {
-  getProductById,
-  removeProduct,
-  updateProduct,
-} from "@/lib/products";
 
 const parseTags = (raw: unknown) => {
   if (Array.isArray(raw)) {
@@ -25,7 +22,7 @@ const parseTags = (raw: unknown) => {
 };
 
 const ensureAuth = async () => {
-  const session = await getServerSession(authOptions);
+  const session = (await getServerSession(authOptions)) as Session | null;
   return session?.user?.email;
 };
 

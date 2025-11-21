@@ -1,7 +1,8 @@
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
+import { v2 as cloudinary } from "cloudinary";
 import { NextResponse } from "next/server";
 import { authOptions } from "@/lib/auth";
-import { v2 as cloudinary } from "cloudinary";
+import { Session } from "next-auth";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -10,7 +11,7 @@ cloudinary.config({
 });
 
 export async function POST(request: Request) {
-  const session = await getServerSession(authOptions);
+  const session = (await getServerSession(authOptions)) as Session | null;
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Acceso no autorizado" }, { status: 401 });
   }

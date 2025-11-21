@@ -1,4 +1,6 @@
 declare module "next-auth" {
+  export type NextAuthOptions = import("next-auth/core/types").AuthOptions;
+
   interface Session {
     user?: {
       id?: string;

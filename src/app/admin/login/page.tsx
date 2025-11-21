@@ -1,11 +1,12 @@
 import Image from "next/image";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
+import type { Session } from "next-auth";
 import { redirect } from "next/navigation";
 import LoginForm from "@/components/admin/LoginForm";
 import { authOptions } from "@/lib/auth";
 
 export default async function AdminLoginPage() {
-  const session = await getServerSession(authOptions);
+  const session = (await getServerSession(authOptions)) as Session | null;
   if (session?.user) {
     redirect("/admin");
   }

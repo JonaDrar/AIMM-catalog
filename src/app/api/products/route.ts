@@ -1,7 +1,8 @@
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
+import { createProduct, getProducts, DEFAULT_PAGE_SIZE } from "@/lib/products";
 import { NextResponse, type NextRequest } from "next/server";
 import { authOptions } from "@/lib/auth";
-import { createProduct, getProducts, DEFAULT_PAGE_SIZE } from "@/lib/products";
+import { Session } from "next-auth";
 
 const parseTags = (raw: unknown) => {
   if (Array.isArray(raw)) {
@@ -32,7 +33,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const session = await getServerSession(authOptions);
+  const session = (await getServerSession(authOptions)) as Session | null;
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Acceso no autorizado" }, { status: 401 });
   }
