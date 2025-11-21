@@ -10,6 +10,12 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const greeting = (() => {
+    const hour = new Date().getHours();
+    if (hour >= 7 && hour <= 11) return "Buen día";
+    if (hour >= 12 && hour <= 19) return "Buenas tardes";
+    return "Buenas noches";
+  })();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -40,10 +46,10 @@ export default function LoginForm() {
           Administrador
         </p>
         <h1 className="mt-1 text-2xl font-extrabold text-[--primary]">
-          Inicia sesión
+          {greeting}, Miguel
         </h1>
         <p className="mt-1 text-sm text-[--muted]">
-          Accede al panel para gestionar el catálogo de repuestos.
+          Inicia sesión para gestionar el catálogo de repuestos.
         </p>
       </div>
 
