@@ -40,7 +40,7 @@ export default function HomePage() {
             alt="Cargadores frontales en faena"
             fill
             sizes="100vw"
-            className="object-cover"
+            className="object-cover object-top"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-[#0b2d56]/40 to-transparent" />
