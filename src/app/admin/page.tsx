@@ -1,10 +1,16 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { getServerSession } from "next-auth/next";
 import type { Session } from "next-auth";
 import { redirect } from "next/navigation";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+
+export const metadata: Metadata = {
+  title: "Panel de administración",
+  robots: { index: false, follow: false },
+};
 
 export const dynamic = "force-dynamic";
 

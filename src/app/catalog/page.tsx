@@ -1,9 +1,36 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import CatalogClient from "@/components/catalog/CatalogClient";
 import { DEFAULT_PAGE_SIZE, getProducts } from "@/lib/products";
+import { SITE_NAME, getSiteUrl } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Catálogo de repuestos para maquinaria pesada",
+  description:
+    "Busca repuestos por código, marca o modelo y valida disponibilidad en línea. Consulta equivalencias para cargadores frontales, excavadoras y camiones.",
+  alternates: { canonical: "/catalog" },
+  openGraph: {
+    title: `${SITE_NAME} | Catálogo de repuestos`,
+    description:
+      "Encuentra filtros, pastillas de freno, kits y repuestos compatibles con tu maquinaria pesada. Respuesta rápida y asesoría técnica.",
+    url: `${getSiteUrl()}/catalog`,
+    images: [
+      {
+        url: "/assets/images/camion.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Camión de obra con repuestos disponibles en catálogo",
+      },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default async function CatalogPage() {
   const { products, total } = await getProducts({

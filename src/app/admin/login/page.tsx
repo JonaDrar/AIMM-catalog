@@ -1,9 +1,15 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { getServerSession } from "next-auth/next";
 import type { Session } from "next-auth";
 import { redirect } from "next/navigation";
 import LoginForm from "@/components/admin/LoginForm";
 import { authOptions } from "@/lib/auth";
+
+export const metadata: Metadata = {
+  title: "Acceso administrador",
+  robots: { index: false, follow: false },
+};
 
 export default async function AdminLoginPage() {
   const session = (await getServerSession(authOptions)) as Session | null;

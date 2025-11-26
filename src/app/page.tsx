@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SITE_NAME, SITE_TAGLINE, getSiteUrl } from "@/lib/seo";
 
 const brandLogos = [
   { name: "XCMG", src: "/assets/logos/XCMG.png" },
@@ -14,6 +15,40 @@ const brandLogos = [
 ];
 
 export default function HomePage() {
+  const siteUrl = getSiteUrl();
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: SITE_NAME,
+        url: siteUrl,
+        logo: `${siteUrl}/assets/logos/AIMM.png`,
+        sameAs: ["https://wa.me/56976204924"],
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            telephone: "+56976204924",
+            contactType: "customer service",
+            areaServed: "CL",
+            availableLanguage: ["Spanish"],
+          },
+        ],
+      },
+      {
+        "@type": "WebSite",
+        name: SITE_NAME,
+        url: siteUrl,
+        description: SITE_TAGLINE,
+        potentialAction: {
+          "@type": "SearchAction",
+          target: `${siteUrl}/catalog?search={search_term_string}`,
+          "query-input": "required name=search_term_string",
+        },
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-white">
       <nav className="fixed left-0 right-0 top-0 z-20 flex items-center justify-between bg-white px-4 py-4 shadow-sm sm:px-10">
@@ -81,6 +116,12 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
     </main>
   );
 }
