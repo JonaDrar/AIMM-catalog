@@ -28,7 +28,7 @@ export default function ProductCard({ product }: Props) {
           {product.description}
         </h3>
         <p className="text-xs font-extrabold uppercase">{product.brand ?? ""}</p>
-        <p className="text-xs font-extrabold uppercase">{product.tags[2] ?? ""}</p>
+        <p className="text-xs font-extrabold uppercase">{product.model ?? ""}</p>
         <p className="text-xs font-extrabold uppercase">{product.code ?? ""}</p>
       </div>
     </article>

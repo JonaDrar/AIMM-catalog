@@ -12,6 +12,7 @@ const brandLogos = [
   { name: "SDLG", src: "/assets/logos/sdlg.png" },
   { name: "Dressta", src: "/assets/logos/dressta.png" },
   { name: "LiuGong", src: "/assets/logos/liugong.png" },
+  { name: "SEM", src: "/assets/logos/sem.png" },
 ];
 
 export default function HomePage() {
