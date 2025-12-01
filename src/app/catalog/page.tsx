@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import CatalogClient from "@/components/catalog/CatalogClient";
 import { DEFAULT_PAGE_SIZE, getProducts } from "@/lib/products";
-import { SITE_NAME, getSiteUrl } from "@/lib/seo";
+import { SITE_NAME, buildAbsoluteUrl, getProductUrl, getSiteUrl } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -12,19 +12,19 @@ export const metadata: Metadata = {
   description:
     "Busca repuestos por código, marca o modelo y valida disponibilidad en línea. Consulta equivalencias para cargadores frontales, excavadoras y camiones.",
   alternates: { canonical: "/catalog" },
-  openGraph: {
-    title: `${SITE_NAME} | Catálogo de repuestos`,
-    description:
-      "Encuentra filtros, pastillas de freno, kits y repuestos compatibles con tu maquinaria pesada. Respuesta rápida y asesoría técnica.",
-    url: `${getSiteUrl()}/catalog`,
-    images: [
-      {
-        url: "/assets/images/camion.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Camión de obra con repuestos disponibles en catálogo",
-      },
-    ],
+    openGraph: {
+      title: `${SITE_NAME} | Catálogo de repuestos`,
+      description:
+        "Encuentra filtros, pastillas de freno, kits y repuestos compatibles con tu maquinaria pesada. Respuesta rápida y asesoría técnica.",
+      url: `${getSiteUrl()}/catalog`,
+      images: [
+        {
+          url: buildAbsoluteUrl("/assets/images/camion.jpg"),
+          width: 1200,
+          height: 630,
+          alt: "Camión de obra con repuestos disponibles en catálogo",
+        },
+      ],
   },
   robots: {
     index: true,
@@ -37,6 +37,25 @@ export default async function CatalogPage() {
     page: 1,
     pageSize: DEFAULT_PAGE_SIZE,
   });
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: products.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: getProductUrl(product),
+      item: {
+        "@type": "Product",
+        name: product.description,
+        description: product.description,
+        image: [buildAbsoluteUrl(product.imageUrl ?? "/assets/images/retros.png")],
+        sku: product.code ?? undefined,
+        model: product.model ?? undefined,
+        brand: product.brand ? { "@type": "Brand", name: product.brand } : undefined,
+        url: getProductUrl(product),
+      },
+    })),
+  };
 
   return (
     <main className="min-h-screen bg-white pb-16">
@@ -94,6 +113,12 @@ export default async function CatalogPage() {
           className="h-8 w-8"
         />
       </Link>
+
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
     </main>
   );
 }
