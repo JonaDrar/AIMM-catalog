@@ -174,10 +174,7 @@ export default async function ProductDetailPage({ params }: PageParams) {
 
   return (
     <main className="min-h-screen bg-white pb-12">
-      <header className="flex items-center justify-between px-4 py-4 sm:px-10">
-        <Link href="/catalog" className="text-sm font-semibold text-[#10456f] hover:underline">
-          ← Volver al catálogo
-        </Link>
+      <header className="flex items-center justify-between px-4 py-4 sm:px-10 md:mb-12">
         <Image
           src="/assets/logos/AIMM.png"
           alt="AIMM logo"
@@ -186,16 +183,13 @@ export default async function ProductDetailPage({ params }: PageParams) {
           className="h-12 w-auto object-contain"
           priority
         />
-        <Link
-          href="/"
-          className="text-sm font-light text-[#10456f] underline-offset-4 hover:underline"
-        >
-          Inicio
+        <Link href="/catalog" className="text-sm font-semibold text-[#10456f] hover:underline">
+          ← Volver
         </Link>
       </header>
 
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-10">
-        <nav aria-label="Breadcrumb" className="mb-4 text-sm text-[--muted]">
+        <nav aria-label="Breadcrumb" className="mb-4 md:mb-24 text-sm text-[--muted]">
           <ol className="flex flex-wrap items-center gap-2">
             <li>
               <Link href="/" className="hover:text-[--primary] hover:underline">
