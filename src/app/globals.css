@@ -57,3 +57,18 @@ a {
     transform: translateY(0);
   }
 }
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f5f6f8 0%, #e9edf3 50%, #f5f6f8 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}

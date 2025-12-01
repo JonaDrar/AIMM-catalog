@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import SkeletonImage from "@/components/ui/SkeletonImage";
 import { getProductById } from "@/lib/products";
 import {
   SITE_NAME,
@@ -213,16 +214,15 @@ export default async function ProductDetailPage({ params }: PageParams) {
         </nav>
 
         <section className="grid gap-8 rounded-2xl border border-[#e5e7eb] bg-white p-4 shadow-sm sm:p-6 md:grid-cols-[1.05fr_0.95fr]">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-[#e5e7eb] bg-[#f8fafc]">
-            <Image
-              src={imageUrl}
-              alt={product.description}
-              fill
-              className="object-contain"
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          </div>
+          <SkeletonImage
+            src={imageUrl}
+            alt={product.description}
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, 50vw"
+            containerClassName="relative aspect-[4/3] overflow-hidden rounded-xl border border-[#e5e7eb] bg-[#f8fafc]"
+            imageClassName="object-contain"
+          />
 
           <div className="space-y-4">
             <div className="space-y-2">

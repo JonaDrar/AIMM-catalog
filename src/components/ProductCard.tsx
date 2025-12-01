@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import SkeletonImage from "@/components/ui/SkeletonImage";
 import type { Product } from "@/types/product";
 import { buildProductSlug } from "@/lib/seo";
 
@@ -21,16 +21,15 @@ export default function ProductCard({ product }: Props) {
       aria-label={`Ver detalles de ${product.description}`}
     >
       <article className="flex h-full flex-col">
-        <div className="relative w-full flex-1 min-h-[200px] bg-white p-3">
-          <Image
-            src={imageUrl}
-            alt={product.description}
-            fill
-            className="object-contain transition duration-150 group-hover:scale-[1.01]"
-            sizes="(max-width: 768px) 100vw, 33vw"
-            priority={false}
-          />
-        </div>
+        <SkeletonImage
+          src={imageUrl}
+          alt={product.description}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          containerClassName="relative w-full flex-1 min-h-[200px] bg-white p-3"
+          imageClassName="object-contain transition duration-150 group-hover:scale-[1.01]"
+          priority={false}
+        />
         <div className="bg-[#10456f] px-4 py-2 text-white h-[110px] overflow-hidden">
           <h3 className="text-sm font-extrabold leading-snug uppercase line-clamp-2">
             {product.description}
